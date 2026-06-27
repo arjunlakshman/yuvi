@@ -3,482 +3,319 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Professional portfolio showcasing creative work across photography, 3D art, and filmmaking">
-    <meta name="keywords" content="photography, 3D art, filmmaking, creative, visual artist, portfolio">
-    <!-- CUSTOMIZATION: Change the author name below to your name -->
-    <meta name="author" content="Praywin">
-    <!-- CUSTOMIZATION: Update the title with your name and profession -->
-    <title>Praywin - Creative Visual Artist</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" as="style">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>For Yuvashree</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600&display=swap');
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Montserrat', sans-serif;
+            overflow: hidden;
+            background: linear-gradient(-45deg, #1f0016, #410029, #8a0035, #2a0845);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: #ffffff;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Floating Hearts Animation */
+        .heart {
+            position: absolute;
+            color: rgba(255, 182, 193, 0.4);
+            font-size: 24px;
+            animation: floatUp 10s infinite linear;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+        }
+
+        /* Main Glassmorphism Container */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            padding: 60px 50px;
+            max-width: 650px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+            position: relative;
+            z-index: 10;
+            min-height: 420px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Step Logic Styling */
+        .step {
+            display: none;
+            animation: fadeUp 0.8s ease forwards;
+        }
+
+        .step.active {
+            display: block;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(25px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 2.8em;
+            margin-bottom: 25px;
+            background: linear-gradient(to right, #ffb6c1, #ffdde1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0px 4px 15px rgba(255, 182, 193, 0.3);
+        }
+
+        p {
+            font-weight: 300;
+            font-size: 1.25em;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            color: #fce4ec;
+        }
+
+        .highlight {
+            font-weight: 600;
+            color: #ffffff;
+            font-style: italic;
+            border-bottom: 1px solid rgba(255, 182, 193, 0.5);
+        }
+
+        /* Buttons */
+        .btn-container {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            position: relative;
+            height: 55px; 
+        }
+
+        button {
+            padding: 15px 35px;
+            font-size: 1.05em;
+            font-family: inherit;
+            font-weight: 600;
+            border: none;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #ff416c 0%, #ff4b2b 100%);
+            color: #fff;
+            box-shadow: 0 8px 25px rgba(255, 65, 108, 0.5);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(255, 65, 108, 0.7);
+        }
+
+        #btn-no {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.05);
+            color: #ffb6c1;
+            border: 1px solid rgba(255, 182, 193, 0.3);
+            z-index: 20;
+        }
+
+        /* Progress Dots */
+        .progress-dots {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.15);
+            transition: all 0.4s ease;
+        }
+
+        .dot.active {
+            background: #ffb6c1;
+            box-shadow: 0 0 15px #ffb6c1;
+            transform: scale(1.2);
+        }
+    </style>
 </head>
 <body>
-    <!-- Particle Background -->
-    <div id="particles-container"></div>
-    
-    <!-- Progress Indicator -->
-    <div class="scroll-progress">
-        <div class="progress-bar"></div>
+
+    <script>
+        for(let i=0; i<20; i++) {
+            let heart = document.createElement('div');
+            heart.innerHTML = '&hearts;';
+            heart.className = 'heart';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+            heart.style.animationDuration = (Math.random() * 8 + 8) + 's';
+            heart.style.animationDelay = Math.random() * 5 + 's';
+            document.body.appendChild(heart);
+        }
+    </script>
+
+    <div class="glass-card">
+        
+        <div class="progress-dots" id="dots">
+            <div class="dot active"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+
+        <div class="step active" id="step-1">
+            <h1>A Little Confession...</h1>
+            <p>I know things ended abruptly the other day. I walked away too fast, and the silence since then has been a lot louder than I expected.</p>
+            <div class="btn-container">
+                <button class="btn-primary" onclick="nextStep(2)">Read more</button>
+            </div>
+        </div>
+
+        <div class="step" id="step-2">
+            <h1>The Truth Is...</h1>
+            <p>I am terrible at communicating when I get overwhelmed, and my instinct is always to pull away. But I've realized <span class="highlight">I process things slowly</span> and I just completed processing what happened!</p>
+            <div class="btn-container">
+                <button class="btn-primary" onclick="nextStep(3)">Next</button>
+            </div>
+        </div>
+
+        <div class="step" id="step-3">
+            <h1>So, here is my question.</h1>
+            <p>It feels completely wrong to let someone as amazing as you slip away over a silly misunderstanding. I want to make the effort, I can't say I will change in a day but I will try!</p>
+            <p>Can we have one more chance!?<span class="highlight">maybe a bit slower this time?</span>  and if dosen't work, will promise to let it go</p>
+            <div class="btn-container" id="final-buttons">
+                <button id="btn-no" style="right: 15%;">No, goodbye</button>
+                <button class="btn-primary" id="btn-yes">Yes, Just one more chance!</button>
+            </div>
+        </div>
+
+        <div class="step" id="step-4">
+            <h1>Thank You ❤️</h1>
+            <p>You just made my entire day.</p>
+            <p style="color: #ffb6c1; font-style: italic; font-weight: 600;">I just got the notification. I'm calling you.</p>
+        </div>
+
+        <div class="step" id="step-5">
+            <h1>I Understand.</h1>
+            <p>I respect your boundary, and I'll step back.</p>
+            <p>Before I go, I just want to say <span class="highlight">best of luck for your CA Finals.</span> You have worked incredibly hard for this, and I know you are going to clear it.</p>
+            <p style="color: #ffb6c1; font-style: italic; font-weight: 600; font-size: 0.9em; margin-top: 20px;">Take care, Yuvashree.</p>
+        </div>
+
     </div>
 
-    <!-- Navigation -->
-    <nav class="navbar glass-nav" id="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <!-- CUSTOMIZATION: Change the logo text to your initials -->
-                <span class="logo-text">Praywin</span>
-            </div>
-            <div class="nav-menu" id="nav-menu">
-                <a href="#home" class="nav-link active" data-target="home">🏠 Home</a>
-                <a href="#photography" class="nav-link" data-target="photography">📸 Photography</a>
-                <a href="#3d-art" class="nav-link" data-target="3d-art">🎭 3D Art</a>
-                <a href="#film" class="nav-link" data-target="film">🎬 Film</a>
-                <a href="#about" class="nav-link" data-target="about">👤 About</a>
-                <a href="#contact" class="nav-link" data-target="contact">✉️ Contact</a>
-            </div>
-            <div class="hamburger" id="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </nav>
+    <script>
+        // --- NOTIFICATION CONFIGURATION ---
+        // Go to ntfy.sh and create a unique topic name
+        const NTFY_TOPIC = 'yuvi5423'; 
 
-    <!-- Hero Section -->
-    <section id="home" class="hero-section">
-        <div class="hero-content">
-            <div class="hero-text">
-                <!-- CUSTOMIZATION: Update with your name prominently displayed -->
-                <h1 class="hero-title">
-                    <span class="title-line">Praywin</span>
-                    <span class="title-line subtitle-line">Creative Visual Artist</span>
-                </h1>
-                <!-- CUSTOMIZATION: Change the subtitle to describe what you do -->
-                <p class="hero-subtitle">Capturing stories through photography, 3D art, and film</p>
-                <!-- CUSTOMIZATION: Update the description with your personal approach -->
-                <p class="hero-description">I'm a passionate visual artist with 2+ years of experience in photography, 3D modeling, and filmmaking. I love creating compelling visual narratives that connect with audiences.</p>
-                <div class="hero-cta">
-                    <button class="btn btn--primary cta-primary">View My Work</button>
-                    <button class="btn btn--outline cta-secondary">Get In Touch</button>
-                </div>
-            </div>
-            <!-- CUSTOMIZATION: Update these statistics to reflect your actual achievements -->
-            <div class="hero-stats glass-card">
-                <div class="stat-item">
-                    <span class="stat-number" data-target="500">0</span>
-                    <span class="stat-label">Projects Completed</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number" data-target="50">0</span>
-                    <span class="stat-label">Happy Clients</span>
-                </div>
-                <!--<div class="stat-item">
-                    <span class="stat-number" data-target="8">0</span>
-                    <span class="stat-label">Years Experience</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number" data-target="25">0</span>
-                    <span class="stat-label">Awards Won</span>
-                </div> -->
-            </div>
-        </div>
-        <div class="floating-cards">
-            <div class="floating-card glass-card" style="--delay: 0s">
-                <span class="card-icon">📸</span>
-                <h3>Photography</h3>
-            </div>
-            <div class="floating-card glass-card" style="--delay: 0.5s">
-                <span class="card-icon">🎭</span>
-                <h3>3D Art</h3>
-            </div>
-            <div class="floating-card glass-card" style="--delay: 1s">
-                <span class="card-icon">🎬</span>
-                <h3>Film</h3>
-            </div>
-        </div>
-    </section>
-
-    <!-- 
-    ==========================================
-    PHOTO UPLOAD INSTRUCTIONS
-    ==========================================
-    
-    To add your own photos to this portfolio:
-    
-    1. IMAGE HOSTING: Upload your images to one of these free services:
-       - ImgBB (https://imgbb.com) - No registration required
-       - Cloudinary (https://cloudinary.com) - 25GB free with account
-       - Imgur (https://imgur.com) - Unlimited uploads
-    
-    2. IMAGE SIZES NEEDED:
-       - Thumbnails: 400x300px for gallery previews
-       - Full Size: 1200x800px for lightbox display
-       - Profile Photo: 400x400px (square)
-    
-    3. SUPPORTED FORMATS: JPG, PNG, WEBP (recommended for best compression)
-    
-    4. HOW TO ADD PHOTOS:
-       - Upload your image to hosting service
-       - Copy the direct image URL (right-click > Copy image address)
-       - Replace the URLs in the app.js file in the portfolioData section
-       - Update the title, description, and other details
-    
-    5. WHERE TO FIND THE PHOTO DATA:
-       - Open app.js file
-       - Look for "portfolioData.portfolioSections.photography.projects"
-       - Each project has an "image" field - replace with your URL
-       - Update title, description, category, location, camera, lens, date, and tags
-    
-    Example project structure:
-    {
-      "id": 1,
-      "title": "Your Photo Title",
-      "description": "Describe your photo here",
-      "image": "https://your-image-host.com/your-image.jpg",
-      "category": "Portrait", // Portrait, Landscape, Street, Nature, Commercial, Wedding
-      "location": "Your Location",
-      "camera": "Your Camera Model",
-      "lens": "Your Lens Info",
-      "date": "2024-01-01",
-      "tags": ["tag1", "tag2", "tag3"],
-      "featured": true // Set to true for featured projects
-    }
-    -->
-
-    <!-- Photography Section -->
-    <section id="photography" class="portfolio-section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Photography</h2>
-                <!-- CUSTOMIZATION: Update this description to match your photography style -->
-                <p class="section-description">Capturing life's most precious moments through expert composition and lighting</p>
-            </div>
+        function nextStep(stepNumber) {
+            document.querySelectorAll('.step').forEach(step => step.classList.remove('active'));
             
-            <div class="portfolio-controls glass-card">
-                <div class="category-filters">
-                    <!-- CUSTOMIZATION: Add or modify categories based on your photography specialties -->
-                    <button class="filter-btn active" data-filter="all">All</button>
-                    <button class="filter-btn" data-filter="portrait">Portrait</button>
-                    <button class="filter-btn" data-filter="landscape">Landscape</button>
-                    <button class="filter-btn" data-filter="street">Street</button>
-                    <button class="filter-btn" data-filter="nature">Nature</button>
-                    <button class="filter-btn" data-filter="commercial">Commercial</button>
-                    <button class="filter-btn" data-filter="wedding">Wedding</button>
-                </div>
-                <div class="search-box">
-                    <input type="text" id="photo-search" placeholder="Search projects..." class="form-control">
-                </div>
-            </div>
-
-            <!-- PHOTOGRAPHY GALLERY: Photos are loaded dynamically from app.js -->
-            <div class="portfolio-grid" id="photography-grid">
-                <!-- Photography projects will be dynamically loaded from app.js -->
-                <!-- To add photos: Edit the portfolioData.portfolioSections.photography.projects array in app.js -->
-            </div>
+            // Hide dots if reaching final screens
+            if(stepNumber > 3) {
+                document.getElementById('dots').style.display = 'none';
+            } else {
+                document.querySelectorAll('.dot').forEach((dot, index) => {
+                    if(index < stepNumber) dot.classList.add('active');
+                    else dot.classList.remove('active');
+                });
+            }
             
-            <div class="load-more-container">
-                <button class="btn btn--outline load-more-btn" id="photo-load-more">Load More</button>
-            </div>
-        </div>
-    </section>
+            document.getElementById('step-' + stepNumber).classList.add('active');
+        }
 
-    <!-- 3D Art Section -->
-    <section id="3d-art" class="portfolio-section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">3D Art & Design</h2>
-                <!-- CUSTOMIZATION: Update this description to match your 3D art style -->
-                <p class="section-description">Digital sculptures and immersive environments created with cutting-edge 3D technology</p>
-            </div>
-            
-            <div class="portfolio-controls glass-card">
-                <div class="category-filters">
-                    <!-- CUSTOMIZATION: Modify categories based on your 3D specialties -->
-                    <button class="filter-btn active" data-filter="all">All</button>
-                    <button class="filter-btn" data-filter="character-design">Character Design</button>
-                    <button class="filter-btn" data-filter="environment">Environment</button>
-                    <button class="filter-btn" data-filter="product-viz">Product Viz</button>
-                    <button class="filter-btn" data-filter="architecture">Architecture</button>
-                    <button class="filter-btn" data-filter="abstract">Abstract</button>
-                </div>
-                <div class="search-box">
-                    <input type="text" id="art-search" placeholder="Search projects..." class="form-control">
-                </div>
-            </div>
+        // --- FORGIVING EVASIVE BUTTON LOGIC ---
+        const btnNo = document.getElementById('btn-no');
+        const btnContainer = document.getElementById('final-buttons');
+        let hoverCount = 0;
+        const MAX_HOVERS = 3; // She can catch it on the 4th try
 
-            <!-- 3D ART GALLERY: Projects are loaded dynamically from app.js -->
-            <div class="portfolio-grid" id="art-grid">
-                <!-- 3D Art projects will be dynamically loaded from app.js -->
-                <!-- To add 3D art: Edit the portfolioData.portfolioSections.3d-art.projects array in app.js -->
-            </div>
-            
-            <div class="load-more-container">
-                <button class="btn btn--outline load-more-btn" id="art-load-more">Load More</button>
-            </div>
-        </div>
-    </section>
+        btnNo.addEventListener('mouseover', () => {
+            if (hoverCount < MAX_HOVERS) {
+                const containerRect = btnContainer.getBoundingClientRect();
+                const btnRect = btnNo.getBoundingClientRect();
 
-    <!-- Film Section -->
-    <section id="film" class="portfolio-section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Film & Video Production</h2>
-                <!-- CUSTOMIZATION: Update this description to match your film/video style -->
-                <p class="section-description">Cinematic storytelling through compelling visual narratives and professional video production</p>
-            </div>
-            
-            <div class="portfolio-controls glass-card">
-                <div class="category-filters">
-                    <!-- CUSTOMIZATION: Modify categories based on your film/video specialties -->
-                    <button class="filter-btn active" data-filter="all">All</button>
-                    <button class="filter-btn" data-filter="short-film">Short Film</button>
-                    <button class="filter-btn" data-filter="commercial">Commercial</button>
-                    <button class="filter-btn" data-filter="music-video">Music Video</button>
-                    <button class="filter-btn" data-filter="documentary">Documentary</button>
-                    <button class="filter-btn" data-filter="corporate">Corporate</button>
-                </div>
-                <div class="search-box">
-                    <input type="text" id="film-search" placeholder="Search projects..." class="form-control">
-                </div>
-            </div>
+                const maxX = containerRect.width - btnRect.width;
+                const maxY = 120; 
 
-            <!-- FILM GALLERY: Projects are loaded dynamically from app.js -->
-            <div class="portfolio-grid" id="film-grid">
-                <!-- Film projects will be dynamically loaded from app.js -->
-                <!-- To add films: Edit the portfolioData.portfolioSections.film.projects array in app.js -->
-            </div>
-            
-            <div class="load-more-container">
-                <button class="btn btn--outline load-more-btn" id="film-load-more">Load More</button>
-            </div>
-        </div>
-    </section>
+                const randomX = Math.floor(Math.random() * maxX) - (maxX / 2);
+                const randomY = Math.floor(Math.random() * maxY) - 40;
 
-    <!-- About Section -->
-    <section id="about" class="about-section">
-        <div class="container">
-            <div class="about-content">
-                <div class="about-image glass-card">
-                    <!-- 
-                    CUSTOMIZATION: Replace this profile image URL with your own photo
-                    Recommended size: 400x400px (square format)
-                    Upload to image hosting service and replace the URL below
-                    -->
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&auto=format&q=80" alt="Praywin" class="profile-image">
-                    <div class="availability-badge">
-                        <span class="status-dot"></span>
-                        <!-- CUSTOMIZATION: Update availability status -->
-                        Available for new projects
-                    </div>
-                </div>
+                btnNo.style.transform = `translate(${randomX}px, ${randomY}px)`;
+                hoverCount++;
                 
-                <div class="about-info">
-                    <!-- CUSTOMIZATION: Replace with your personal information -->
-                    <h2 class="about-title">Praywin</h2>
-                    <p class="about-subtitle">Creative Visual Artist</p>
-                    <!-- CUSTOMIZATION: Write your personal bio here -->
-                    <p class="about-bio">With over 2 years of experience in the creative industry, I specialize in bringing stories to life through multiple visual mediums. My work spans from intimate portrait photography to large-scale film productions, always with a focus on authentic storytelling and technical excellence.</p>
-                    
-                    <div class="skills-section glass-card">
-                        <h3>Skills & Expertise</h3>
-                        <div class="skills-grid">
-                            <!-- CUSTOMIZATION: Update skills and percentages to match your expertise -->
-                            <div class="skill-item">
-                                <div class="skill-header">
-                                    <span class="skill-icon">📸</span>
-                                    <span class="skill-name">Photography</span>
-                                    <span class="skill-percentage">95%</span>
-                                </div>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" style="width: 95%"></div>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <div class="skill-header">
-                                    <span class="skill-icon">🎭</span>
-                                    <span class="skill-name">3D Modeling</span>
-                                    <span class="skill-percentage">90%</span>
-                                </div>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" style="width: 90%"></div>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <div class="skill-header">
-                                    <span class="skill-icon">🎬</span>
-                                    <span class="skill-name">Video Production</span>
-                                    <span class="skill-percentage">92%</span>
-                                </div>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" style="width: 92%"></div>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <div class="skill-header">
-                                    <span class="skill-icon">✂️</span>
-                                    <span class="skill-name">Post-Production</span>
-                                    <span class="skill-percentage">88%</span>
-                                </div>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" style="width: 88%"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="download-cv">
-                        <button class="btn btn--primary">Download Resume</button>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- CUSTOMIZATION: Update testimonials with real client feedback -->
-            <div class="testimonials-section">
-                <h3 class="testimonials-title">What Clients Say</h3>
-                <div class="testimonials-grid">
-                    <div class="testimonial glass-card">
-                        <div class="testimonial-content">
-                            <p>"Praywin's vision and technical expertise brought our campaign to life in ways we never imagined. His attention to detail and creative approach made all the difference."</p>
-                        </div>
-                        <div class="testimonial-author">
-                            <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=80&h=80&fit=crop&auto=format&q=80" alt="Sarah Johnson" class="author-image">
-                            <div class="author-info">
-                                <h4>Sarah Johnson</h4>
-                                <p>Creative Director, Nike</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial glass-card">
-                        <div class="testimonial-content">
-                            <p>"Working with Praywin was exceptional. His ability to capture our brand essence through video storytelling exceeded our expectations and delivered real business results."</p>
-                        </div>
-                        <div class="testimonial-author">
-                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&auto=format&q=80" alt="Michael Chen" class="author-image">
-                            <div class="author-info">
-                                <h4>Michael Chen</h4>
-                                <p>CEO, TechFlow Solutions</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial glass-card">
-                        <div class="testimonial-content">
-                            <p>"Praywin's 3D visualizations helped us present our new models in stunning detail. His technical skills combined with artistic vision are truly remarkable."</p>
-                        </div>
-                        <div class="testimonial-author">
-                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&h=80&fit=crop&auto=format&q=80" alt="Emma Rodriguez" class="author-image">
-                            <div class="author-info">
-                                <h4>Emma Rodriguez</h4>
-                                <p>Art Director, Mercedes-Benz</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+                // Change text slightly to be playful
+                if(hoverCount === 2) btnNo.innerText = "Sure about that?";
+                if(hoverCount === 3) btnNo.innerText = "Okay, you win. Click me.";
+            }
+        });
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact-section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Let's Create Something Amazing Together</h2>
-                <p class="section-description">Ready to bring your vision to life? Get in touch and let's discuss your next project.</p>
-            </div>
-            
-            <div class="contact-content">
-                <div class="contact-info glass-card">
-                    <!-- CUSTOMIZATION: Update all contact information with your details -->
-                    <div class="contact-item">
-                        <span class="contact-icon">✉️</span>
-                        <div class="contact-details">
-                            <h4>Email</h4>
-                            <a href="mailto:alex@example.com">alex@example.com</a>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <span class="contact-icon">📞</span>
-                        <div class="contact-details">
-                            <h4>Phone</h4>
-                            <a href="tel:+15551234567">+1 (555) 123-4567</a>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <span class="contact-icon">📍</span>
-                        <div class="contact-details">
-                            <h4>Location</h4>
-                            <span>Los Angeles, CA</span>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <span class="contact-icon">⏱️</span>
-                        <div class="contact-details">
-                            <h4>Response Time</h4>
-                            <span>24 hours</span>
-                        </div>
-                    </div>
-                    
-                    <!-- CUSTOMIZATION: Update social media links with your profiles -->
-                    <div class="social-links">
-                        <h4>Follow Me</h4>
-                        <div class="social-grid">
-                            <a href="https://instagram.com/alexthompson" target="_blank" class="social-link">📷 Instagram</a>
-                            <a href="https://linkedin.com/in/alexthompson" target="_blank" class="social-link">💼 LinkedIn</a>
-                            <a href="https://vimeo.com/alexthompson" target="_blank" class="social-link">🎥 Vimeo</a>
-                            <a href="https://behance.net/alexthompson" target="_blank" class="social-link">🎨 Behance</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <form class="contact-form glass-card" id="contact-form">
-                    <div class="form-group">
-                        <label for="name" class="form-label">Name *</label>
-                        <input type="text" id="name" name="name" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email" class="form-label">Email *</label>
-                        <input type="email" id="email" name="email" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="project-type" class="form-label">Project Type</label>
-                        <select id="project-type" name="project-type" class="form-control">
-                            <option value="">Select a service</option>
-                            <option value="photography">Photography</option>
-                            <option value="3d-art">3D Art & Visualization</option>
-                            <option value="film">Film & Video Production</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="message" class="form-label">Message *</label>
-                        <textarea id="message" name="message" class="form-control" rows="6" required placeholder="Tell me about your project..."></textarea>
-                    </div>
-                    <button type="submit" class="btn btn--primary btn--full-width">Send Message</button>
-                </form>
-            </div>
-        </div>
-    </section>
+        // --- CLICK EVENT FOR 'NO' ---
+        btnNo.addEventListener('click', () => {
+            // Trigger push notification for rejection
+            fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
+                method: 'POST', 
+                body: 'Yuvashree clicked NO. She chose to let it go.',
+                headers: {
+                    'Title': 'She said No.'
+                }
+            }).catch(error => console.error('Notification failed:', error));
 
-    <!-- Project Modal -->
-    <div class="modal hidden" id="project-modal">
-        <div class="modal-overlay" id="modal-overlay"></div>
-        <div class="modal-content glass-card">
-            <button class="modal-close" id="modal-close">&times;</button>
-            <div class="modal-nav">
-                <button class="modal-nav-btn" id="modal-prev">‹</button>
-                <button class="modal-nav-btn" id="modal-next">›</button>
-            </div>
-            <div class="modal-body" id="modal-body">
-                <!-- Dynamic content will be loaded here -->
-            </div>
-        </div>
-    </div>
+            // Proceed to farewell step
+            nextStep(5);
+        });
 
-    <!-- Loading Overlay -->
-    <div class="loading-overlay" id="loading-overlay">
-        <div class="loading-spinner"></div>
-    </div>
+        // --- CLICK EVENT FOR 'YES' ---
+        const btnYes = document.getElementById('btn-yes');
+        btnYes.addEventListener('click', () => {
+            // Trigger push notification for success
+            fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
+                method: 'POST', 
+                body: 'Yuvashree clicked YES! She misses you too. Call her!',
+                headers: {
+                    'Title': 'She said YES! ❤️'
+                }
+            }).catch(error => console.error('Notification failed:', error));
 
-    <script src="app.js"></script>
+            // Proceed to success step
+            nextStep(4);
+        });
+    </script>
+
 </body>
 </html>
