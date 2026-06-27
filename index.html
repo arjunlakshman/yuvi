@@ -2,19 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>For Yuvashree</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600&display=swap');
 
         * {
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent; /* Removes blue flash on mobile tap */
         }
 
         body {
             margin: 0;
             padding: 0;
             height: 100vh;
+            height: 100dvh; /* Better mobile viewport handling */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -171,6 +173,39 @@
             box-shadow: 0 0 15px #ffb6c1;
             transform: scale(1.2);
         }
+
+        /* 📱 MOBILE RESPONSIVE QUERIES */
+        @media (max-width: 600px) {
+            .glass-card {
+                padding: 40px 25px;
+                width: 95%;
+                min-height: 380px;
+            }
+
+            h1 {
+                font-size: 2.1em;
+                margin-bottom: 20px;
+            }
+
+            p {
+                font-size: 1.1em;
+                margin-bottom: 25px;
+                line-height: 1.6;
+            }
+
+            .btn-container {
+                gap: 10px;
+            }
+
+            button {
+                padding: 14px 22px;
+                font-size: 0.95em;
+            }
+
+            #btn-no {
+                right: 5%; /* Brings the NO button a bit closer on small screens */
+            }
+        }
     </style>
 </head>
 <body>
@@ -215,11 +250,11 @@
 
         <div class="step" id="step-3">
             <h1>So, here is my question.</h1>
-            <p>It feels completely wrong to let someone as amazing as you slip away over a silly misunderstanding. I want to make the effort, I can't say I will change in a day but I will try!</p>
-            <p>Can we have one more chance!?<span class="highlight">maybe a bit slower this time?</span>  and if dosen't work, will promise to let it go</p>
+            <p>It feels completely wrong to let someone as amazing as you slip away over a silly misunderstanding. I want to make the effort. I can't say I will change in a day but I will try!</p>
+            <p>Can we have one more chance!? <span class="highlight">Maybe a bit slower this time?</span> And if it doesn't work, I promise to let it go.</p>
             <div class="btn-container" id="final-buttons">
-                <button id="btn-no" style="right: 15%;">No, goodbye</button>
-                <button class="btn-primary" id="btn-yes">Yes, Just one more chance!</button>
+                <button id="btn-no" style="right: 10%;">No, goodbye</button>
+                <button class="btn-primary" id="btn-yes">Yes, just one more chance!</button>
             </div>
         </div>
 
@@ -240,13 +275,11 @@
 
     <script>
         // --- NOTIFICATION CONFIGURATION ---
-        // Go to ntfy.sh and create a unique topic name
         const NTFY_TOPIC = 'yuvi5423'; 
 
         function nextStep(stepNumber) {
             document.querySelectorAll('.step').forEach(step => step.classList.remove('active'));
             
-            // Hide dots if reaching final screens
             if(stepNumber > 3) {
                 document.getElementById('dots').style.display = 'none';
             } else {
@@ -259,60 +292,69 @@
             document.getElementById('step-' + stepNumber).classList.add('active');
         }
 
-        // --- FORGIVING EVASIVE BUTTON LOGIC ---
+        // --- MOBILE/DESKTOP EVASIVE BUTTON LOGIC ---
         const btnNo = document.getElementById('btn-no');
         const btnContainer = document.getElementById('final-buttons');
         let hoverCount = 0;
-        const MAX_HOVERS = 3; // She can catch it on the 4th try
+        const MAX_HOVERS = 3; 
 
-        btnNo.addEventListener('mouseover', () => {
+        // Function that handles moving the button
+        function runAway(e) {
             if (hoverCount < MAX_HOVERS) {
+                // Prevent actual click/tap from registering on early attempts
+                if(e) e.preventDefault(); 
+
                 const containerRect = btnContainer.getBoundingClientRect();
                 const btnRect = btnNo.getBoundingClientRect();
 
                 const maxX = containerRect.width - btnRect.width;
-                const maxY = 120; 
+                // Keep movement slightly tighter on mobile
+                const maxY = window.innerWidth < 600 ? 80 : 120; 
 
                 const randomX = Math.floor(Math.random() * maxX) - (maxX / 2);
-                const randomY = Math.floor(Math.random() * maxY) - 40;
+                const randomY = Math.floor(Math.random() * maxY) - (maxY / 3);
 
                 btnNo.style.transform = `translate(${randomX}px, ${randomY}px)`;
                 hoverCount++;
                 
-                // Change text slightly to be playful
-                if(hoverCount === 2) btnNo.innerText = "Sure about that?";
-                if(hoverCount === 3) btnNo.innerText = "Okay, you win. Click me.";
+                // Playful text changes for mobile width limits
+                if(hoverCount === 2) btnNo.innerText = "Sure?";
+                if(hoverCount === 3) btnNo.innerText = "Okay, click me.";
             }
-        });
+        }
+
+        // Desktop mouse hover
+        btnNo.addEventListener('mouseover', (e) => runAway(e));
+        // Mobile touch intercept
+        btnNo.addEventListener('touchstart', (e) => runAway(e), { passive: false });
 
         // --- CLICK EVENT FOR 'NO' ---
-        btnNo.addEventListener('click', () => {
-            // Trigger push notification for rejection
-            fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
-                method: 'POST', 
-                body: 'Yuvashree clicked NO. She chose to let it go.',
-                headers: {
-                    'Title': 'She said No.'
-                }
-            }).catch(error => console.error('Notification failed:', error));
+        btnNo.addEventListener('click', (e) => {
+            // Only proceed if it has run away 3 times
+            if (hoverCount >= MAX_HOVERS) {
+                fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
+                    method: 'POST', 
+                    body: 'Yuvashree clicked NO. She chose to let it go.',
+                    headers: {
+                        'Title': 'She said No.'
+                    }
+                }).catch(error => console.error('Notification failed:', error));
 
-            // Proceed to farewell step
-            nextStep(5);
+                nextStep(5);
+            }
         });
 
         // --- CLICK EVENT FOR 'YES' ---
         const btnYes = document.getElementById('btn-yes');
         btnYes.addEventListener('click', () => {
-            // Trigger push notification for success
             fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
                 method: 'POST', 
-                body: 'Yuvashree clicked YES! She misses you too. Call her!',
+                body: 'Yuvashree clicked YES! She misses you too. Call her! ❤️',
                 headers: {
-                    'Title': 'She said YES!'
+                    'Title': 'She said YES!' // Emoji removed from Title to fix the bug
                 }
             }).catch(error => console.error('Notification failed:', error));
 
-            // Proceed to success step
             nextStep(4);
         });
     </script>
